@@ -1,0 +1,33 @@
+Subject: Fix build with GCC 11
+Author: Martin Väth
+Date: 2021-05-03
+Bug-Debian: https://bugs.debian.org/984339
+Bug-Gentoo: https://bugs.gentoo.org/786498
+
+    From the Gentoo bug ticket:
+
+    Comment to the patch, since it might look wrong at a first glance:
+
+    All documentation about the return value of XCreateGC I found states
+    that it returns a proper pointer and in the error case sets some
+    failure stat. In particular, I found no documentation that it
+    returns a "negative" pointer.
+
+    The cleanest patch would probably be to check the failure stat, but
+    since I am not sure about it, the most reasonable analogous check to
+    the original code is to check whether we get a null pointer
+    returned. (Very likely, neither the original code nor the patch work
+    properly in the error case, but at least the patch fixes the
+    compilation issue and causes no regression in the non-error case.)
+
+--- a/panel.cpp
++++ b/panel.cpp
+@@ -48,7 +48,7 @@
+ 		gcm = GCGraphicsExposures;
+ 		gcv.graphics_exposures = False;
+ 		WinGC = XCreateGC(Dpy, Win, gcm, &gcv);
+-		if (WinGC < 0) {
++		if (WinGC == 0) {
+ 			cerr << APPNAME
+ 				<< ": failed to create pixmap\n.";
+ 			exit(ERR_EXIT);

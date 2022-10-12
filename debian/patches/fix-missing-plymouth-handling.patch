@@ -1,0 +1,16 @@
+Description: Order slim.service after plymouth-quit.service
+ See the discussion in https://bugs.debian.org/782456
+Author: Mateusz Łukasik <mati75@linuxmint.pl>
+Bug-Debian: https://bugs.debian.org/860465
+Last-Update: 2017-05-03
+
+--- a/slim.service
++++ b/slim.service
+@@ -1,6 +1,6 @@
+ [Unit]
+ Description=SLiM Simple Login Manager
+-After=systemd-user-sessions.service
++After=systemd-user-sessions.service plymouth-quit.service
+ 
+ [Service]
+ ExecStartPre=/bin/sh -c '[ "$(cat /etc/X11/default-display-manager 2>/dev/null)" = "/usr/bin/slim" ]'

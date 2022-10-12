@@ -1,0 +1,9 @@
+slim-add-sessiondir.patch
+slim-conf.patch
+slim-fix-env-alloc.patch
+no-slimlock-with-pam.patch
+libslim-cmake-fixes.patch
+fix-systemd-service.patch
+manpage-formatting-fixes.patch
+fix-missing-plymouth-handling.patch
+slim-1.3.6-gcc11.patch

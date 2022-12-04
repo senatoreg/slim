@@ -15,6 +15,7 @@ INTRODUCTION
     - XFT / freetype support
     - Double or single (GDM-style) inputbox support
     - CMake build procedure
+    - Initial logind integration
 
 INSTALLATION
     see the INSTALL file

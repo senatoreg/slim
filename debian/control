@@ -9,11 +9,13 @@ Build-Depends: debconf, debhelper (>= 9.20160709), libjpeg-dev, libpam0g-dev,
 Standards-Version: 3.9.6
 Homepage: http://sourceforge.net/projects/slim.berlios/
 
-Package: slim
+Package: slim-session
 Architecture: any
-Provides: x-display-manager
+Provides: x-display-manager, slim
 Recommends: xterm 
 Suggests: scrot, xauth
+Conflicts: slim
+Breaks: slim
 Depends: ${shlibs:Depends}, ${misc:Depends}, debconf (>= 1.2.9) | debconf-2.0, dbus,
  lsb-base (>= 3.0-6)
 Description: desktop-independent graphical login manager for X11

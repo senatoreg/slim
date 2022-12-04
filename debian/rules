@@ -14,13 +14,13 @@ ifeq ($(DEB_HOST_ARCH_OS),hurd)
 endif
 
 %:
-	dh $@ --buildsystem=cmake --with systemd
+	dh $@ --buildsystem=cmake --name=slim #--with systemd
 
 override_dh_auto_configure:
 	dh_auto_configure -- $(CMAKE_FLAGS)
 
 override_dh_installinit:
-	dh_installinit --noscripts
+	dh_installinit --noscripts --name=slim
 #dh_installinit --no-restart-on-upgrade --no-start \
 #		--update-rcd-params="start 99 2 3 4 5 . stop 1 0 1 6 ."
 
@@ -28,7 +28,8 @@ override_dh_installpam:
 	dh_installpam --name=slim
 
 override_dh_install:
-	dh_install --list-missing
+	dh_install --name=slim
+	dh_missing --list-missing
 
 	# pam
 	#install -D -m 0644  pam.sample \
